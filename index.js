@@ -1,18 +1,17 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const config = require("./config.json");
+let config = {};
+if (process.argv[2] == "dev") {
+  console.log("STARTING DEV");
+  config = require("./config.dev.json");
+} else {
+  console.log("STARTING LIVE");
+  config = require("./config.json");
+}
 
 const Add = require("./Commands/Add.js");
 const List = require("./Commands/List.js");
 const Random = require("./Commands/Random.js");
-
-var quotes = [];
-
-var quote = {
-  username: "",
-  text: "",
-  userId: ""
-};
 
 client.on("ready", () => {
   console.log("I am ready!");
