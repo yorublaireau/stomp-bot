@@ -22,8 +22,11 @@ class Db {
   AddQuote(quote) {
     this.quotes.push(quote);
   }
-  ListQuotes() {
-    return this.quotes.map(q => q.ToShortString()).join("\n");
+  ListQuotes(limit = 10) {
+    return this.quotes
+      .slice(this.quotes.length - limit)
+      .map(q => q.ToShortString())
+      .join("\n");
   }
 
   GetRandomQuote() {
