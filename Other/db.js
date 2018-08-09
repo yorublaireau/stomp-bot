@@ -1,7 +1,7 @@
 const Enmap = require("enmap");
 const EnmapLevel = require("enmap-level");
-
-const mapSource = new EnmapLevel({ name: "map" });
+const { config } = require("../config.js");
+const mapSource = new EnmapLevel({ name: config.enmapDb });
 const dbMap = new Enmap({ provider: mapSource });
 
 class Quote {
@@ -26,9 +26,8 @@ class Quote {
 
 class Db {
   get quotes() {
-    return (
-      dbMap.get("quotes").map(q => new Quote(q.username, q.userId, q.text)) ||
-      []
+    return (dbMap.get("quotes") || []).map(
+      q => new Quote(q.username, q.userId, q.text)
     );
   }
   set quotes(value) {

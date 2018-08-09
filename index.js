@@ -1,14 +1,6 @@
 const Discord = require("discord.js");
 
-let config = {};
-if (process.argv[2] == "dev") {
-  console.log("STARTING DEV");
-  config = require("./config.dev.json");
-} else {
-  console.log("STARTING LIVE");
-  config = require("./config.json");
-}
-
+const { config } = require("./config.js");
 const Add = require("./Commands/Add.js");
 const List = require("./Commands/List.js");
 const Random = require("./Commands/Random.js");
