@@ -41,6 +41,16 @@ class Db {
 
     this.quotes = quotes;
   }
+
+  ListQuotesPerUserId(userId, limit = 10) {
+    var userQuotes = this.quotes.filter(q => q.userId == userId);
+
+    return userQuotes
+      .slice(userQuotes.length - limit)
+      .map(q => q.ToShortString())
+      .join("\n");
+  }
+
   ListQuotes(limit = 10) {
     return this.quotes
       .slice(this.quotes.length - limit)
