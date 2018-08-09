@@ -1,3 +1,9 @@
+const Enmap = require("enmap");
+const EnmapLevel = require("enmap-level");
+
+const mapSource = new EnmapLevel({ name: "map" });
+const dbMap = new Enmap({ provider: mapSource });
+
 class Quote {
   constructor(username, userId, text) {
     this.username = username;
@@ -12,15 +18,29 @@ class Quote {
   ToString() {
     return "```\n" + this.text + "\n- " + this.username + "\n```";
   }
+
+  GetKey() {
+    return this.username + ":" + this.userId + ":" + this.text;
+  }
 }
 
 class Db {
-  constructor() {
-    this.quotes = [];
+  get quotes() {
+    return (
+      dbMap.get("quotes").map(q => new Quote(q.username, q.userId, q.text)) ||
+      []
+    );
+  }
+  set quotes(value) {
+    dbMap.set("quotes", value);
   }
 
   AddQuote(quote) {
-    this.quotes.push(quote);
+    var quotes = this.quotes;
+
+    quotes.push(quote);
+
+    this.quotes = quotes;
   }
   ListQuotes(limit = 10) {
     return this.quotes

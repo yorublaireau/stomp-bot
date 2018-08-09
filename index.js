@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const client = new Discord.Client();
+
 let config = {};
 if (process.argv[2] == "dev") {
   console.log("STARTING DEV");
@@ -12,6 +12,8 @@ if (process.argv[2] == "dev") {
 const Add = require("./Commands/Add.js");
 const List = require("./Commands/List.js");
 const Random = require("./Commands/Random.js");
+
+const client = new Discord.Client();
 
 client.on("ready", () => {
   console.log("I am ready!");
