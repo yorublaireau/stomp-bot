@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/yorublaireau/stomp-bot/issues"
   },
-  "homepage": "https://github.com/yorublaireau/stomp-bot#readme"
+  "homepage": "https://github.com/yorublaireau/stomp-bot#readme",
+  "dependencies": {
+    "discord.js": "^11.4.0"
+  }
 }
